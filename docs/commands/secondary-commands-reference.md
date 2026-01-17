@@ -114,7 +114,7 @@ Remove unstarted future phase and renumber all subsequent phases.
 | `new-milestone` | Start new milestone cycle | `[name]` | researchers, roadmapper | PROJECT.md, ROADMAP.md |
 | `complete-milestone` | Archive milestone and tag | `<version>` | None | Archive files, git tag |
 | `audit-milestone` | Verify milestone completion | `[version]` | gsd-integration-checker | MILESTONE-AUDIT.md |
-| `plan-milestone-gaps` | Create phases for audit gaps | None | None | ROADMAP.md updated |
+| `plan-milestone-gaps` | Create phases for audit gaps | None | gsd-planner | ROADMAP.md updated |
 
 ### /gsd:new-milestone
 
@@ -160,7 +160,7 @@ Verify milestone achieved definition of done before archiving:
 
 ### /gsd:plan-milestone-gaps
 
-Create phases to close gaps identified by audit:
+Create phases to close gaps identified by audit. Spawns the planner to synthesize phase structure and create the resulting plan entries:
 1. Parse gaps from MILESTONE-AUDIT.md
 2. Prioritize by must/should/nice
 3. Group related gaps into logical phases
