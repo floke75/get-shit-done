@@ -15,7 +15,7 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | discuss-phase.md | Gather user context before planning | /gsd:discuss-phase | CONTEXT.md |
 | resume-project.md | Restore context for returning sessions | /gsd:resume-work | Display output |
 | transition.md | Phase completion and next phase setup | execute-phase | STATE.md updates |
-| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | CODEBASE.md |
+| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | .planning/codebase/STACK.md, INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues.md | Parallel gap investigation from UAT | /gsd:verify-work | DEBUG.md files |
 | list-phase-assumptions.md | Surface implicit assumptions in phase | /gsd:list-phase-assumptions | Display output |
 | complete-milestone.md | Archive completed milestone | /gsd:complete-milestone | Milestone archive |
@@ -168,7 +168,14 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 2. Identify frameworks, libraries, patterns
 3. Analyze architecture (layers, modules, dependencies)
 4. Detect technical debt and code smells
-5. Generate CODEBASE.md with findings
+5. Generate .planning/codebase/ analysis files with findings:
+   - STACK.md for frameworks, languages, and core tooling
+   - INTEGRATIONS.md for external services and dependencies
+   - ARCHITECTURE.md for system layers and module boundaries
+   - STRUCTURE.md for directory layout and key packages
+   - CONVENTIONS.md for patterns, naming, and standards
+   - TESTING.md for test strategy, tooling, and gaps
+   - CONCERNS.md for risks, debt, and hotspots
 
 **Key Behaviors:**
 - Produces multiple analysis files (structure, patterns, debt)
@@ -288,6 +295,8 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | codebase/CONVENTIONS.md | .planning/codebase/CONVENTIONS.md | gsd-codebase-mapper | Naming Patterns, Code Style, Imports |
 | codebase/TESTING.md | .planning/codebase/TESTING.md | gsd-codebase-mapper | Test Framework, Organization, Mocking |
 | codebase/CONCERNS.md | .planning/codebase/CONCERNS.md | gsd-codebase-mapper | Tech Debt, Bugs, Performance |
+| todo.md | .planning/todos/pending/*.md, .planning/todos/done/*.md | add-todo | Problem, Solution, Metadata |
+| config.json | .planning/config.json | /gsd:new-project | mode, depth, parallelization, gates, safety |
 
 ---
 
@@ -416,6 +425,54 @@ must_haves:
 
 ---
 
+### config.json Schema
+
+Produced by `/gsd:new-project` and consumed by commands that read `.planning/config.json`. The source of truth for this schema is `get-shit-done/templates/config.json`.
+
+```json
+{
+  "mode": "interactive",
+  "depth": "standard",
+  "parallelization": {
+    "enabled": true,
+    "plan_level": true,
+    "task_level": false,
+    "skip_checkpoints": true,
+    "max_concurrent_agents": 3,
+    "min_plans_for_parallel": 2
+  },
+  "gates": {
+    "confirm_project": true,
+    "confirm_phases": true,
+    "confirm_roadmap": true,
+    "confirm_breakdown": true,
+    "confirm_plan": true,
+    "execute_next_plan": true,
+    "issues_review": true,
+    "confirm_transition": true
+  },
+  "safety": {
+    "always_confirm_destructive": true,
+    "always_confirm_external_services": true
+  }
+}
+```
+
+**Fields:**
+- `mode`: string mode selector (e.g., `interactive`).  
+- `depth`: string planning depth (e.g., `standard`).  
+- `parallelization`: object controlling parallel execution:
+  - `enabled`: boolean to allow parallelism.
+  - `plan_level`: boolean to run plans in parallel.
+  - `task_level`: boolean to run tasks in parallel.
+  - `skip_checkpoints`: boolean to bypass checkpoints during parallel runs.
+  - `max_concurrent_agents`: integer cap for simultaneous agents.
+  - `min_plans_for_parallel`: integer threshold before parallelism activates.
+- `gates`: object of boolean confirmation gates (`confirm_project`, `confirm_phases`, `confirm_roadmap`, `confirm_breakdown`, `confirm_plan`, `execute_next_plan`, `issues_review`, `confirm_transition`).
+- `safety`: object of boolean safety toggles (`always_confirm_destructive`, `always_confirm_external_services`).
+
+---
+
 #### VERIFICATION.md Frontmatter
 
 | Field | Type | Required | Description |
@@ -455,6 +512,32 @@ user_setup:
 | total_tasks | int | Yes | Total tasks in plan |
 | status | string | Yes | `in_progress`, `blocked`, `almost_done` |
 | last_updated | string | Yes | ISO timestamp |
+
+---
+
+#### todo.md Frontmatter (.planning/todos/pending/*.md, .planning/todos/done/*.md)
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| created | string | Yes | ISO timestamp when todo was captured |
+| title | string | Yes | 3–10 word action-focused title |
+| area | string | Yes | Area bucket (api, ui, auth, database, testing, docs, planning, tooling, general) |
+| files | list | No | Referenced file paths with optional line numbers |
+
+**Body Sections:**
+```markdown
+## Problem
+
+[problem description with enough context for future work]
+
+## Solution
+
+[approach hints or "TBD"]
+```
+
+**Notes:**
+- Pending todos live in `.planning/todos/pending/`; completed items move to `.planning/todos/done/`.
+- File naming uses `[YYYY-MM-DD]-[slug].md` based on the todo title.
 
 ---
 
@@ -630,6 +713,7 @@ user_setup:
 | verify-work | UAT.md | — |
 | verify-phase | VERIFICATION.md | Fix plan recommendations |
 | discuss-phase | CONTEXT.md | — |
+| map-codebase | .planning/codebase/STACK.md | INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues | DEBUG.md files | UAT.md updates |
 | complete-milestone | MILESTONES.md, archive | ROADMAP.md collapse |
 
@@ -656,6 +740,7 @@ user_setup:
 | .planning/codebase/CONVENTIONS.md | /gsd:map-codebase | gsd-planner, gsd-executor |
 | .planning/codebase/TESTING.md | /gsd:map-codebase | gsd-planner, gsd-executor |
 | .planning/codebase/CONCERNS.md | /gsd:map-codebase | gsd-planner, gsd-executor |
+| todo.md | add-todo | check-todos, resume-work, STATE.md |
 
 ### Reference → Usage Mapping
 
