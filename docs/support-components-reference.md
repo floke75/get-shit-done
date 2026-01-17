@@ -15,7 +15,7 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | discuss-phase.md | Gather user context before planning | /gsd:discuss-phase | CONTEXT.md |
 | resume-project.md | Restore context for returning sessions | /gsd:resume-work | Display output |
 | transition.md | Phase completion and next phase setup | execute-phase | STATE.md updates |
-| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | CODEBASE.md |
+| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | .planning/codebase/STACK.md, INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues.md | Parallel gap investigation from UAT | /gsd:verify-work | DEBUG.md files |
 | list-phase-assumptions.md | Surface implicit assumptions in phase | /gsd:list-phase-assumptions | Display output |
 | complete-milestone.md | Archive completed milestone | /gsd:complete-milestone | Milestone archive |
@@ -168,7 +168,14 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 2. Identify frameworks, libraries, patterns
 3. Analyze architecture (layers, modules, dependencies)
 4. Detect technical debt and code smells
-5. Generate CODEBASE.md with findings
+5. Generate .planning/codebase/ analysis files with findings:
+   - STACK.md for frameworks, languages, and core tooling
+   - INTEGRATIONS.md for external services and dependencies
+   - ARCHITECTURE.md for system layers and module boundaries
+   - STRUCTURE.md for directory layout and key packages
+   - CONVENTIONS.md for patterns, naming, and standards
+   - TESTING.md for test strategy, tooling, and gaps
+   - CONCERNS.md for risks, debt, and hotspots
 
 **Key Behaviors:**
 - Produces multiple analysis files (structure, patterns, debt)
@@ -277,6 +284,7 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | planner-subagent-prompt.md | (agent prompt) | plan-phase | Planning Context, Quality Gate |
 | debug-subagent-prompt.md | (agent prompt) | debug/diagnose | Symptoms, Mode, Debug File |
 | todo.md | .planning/todos/pending/*.md, .planning/todos/done/*.md | add-todo | Problem, Solution, Metadata |
+| config.json | .planning/config.json | /gsd:new-project | mode, depth, parallelization, gates, safety |
 
 ---
 
@@ -378,6 +386,54 @@ must_haves:
 | trigger | string | Yes | Verbatim user input (immutable) |
 | created | string | Yes | ISO timestamp (immutable) |
 | updated | string | Yes | ISO timestamp (update on every change) |
+
+---
+
+### config.json Schema
+
+Produced by `/gsd:new-project` and consumed by commands that read `.planning/config.json`. The source of truth for this schema is `get-shit-done/templates/config.json`.
+
+```json
+{
+  "mode": "interactive",
+  "depth": "standard",
+  "parallelization": {
+    "enabled": true,
+    "plan_level": true,
+    "task_level": false,
+    "skip_checkpoints": true,
+    "max_concurrent_agents": 3,
+    "min_plans_for_parallel": 2
+  },
+  "gates": {
+    "confirm_project": true,
+    "confirm_phases": true,
+    "confirm_roadmap": true,
+    "confirm_breakdown": true,
+    "confirm_plan": true,
+    "execute_next_plan": true,
+    "issues_review": true,
+    "confirm_transition": true
+  },
+  "safety": {
+    "always_confirm_destructive": true,
+    "always_confirm_external_services": true
+  }
+}
+```
+
+**Fields:**
+- `mode`: string mode selector (e.g., `interactive`).  
+- `depth`: string planning depth (e.g., `standard`).  
+- `parallelization`: object controlling parallel execution:
+  - `enabled`: boolean to allow parallelism.
+  - `plan_level`: boolean to run plans in parallel.
+  - `task_level`: boolean to run tasks in parallel.
+  - `skip_checkpoints`: boolean to bypass checkpoints during parallel runs.
+  - `max_concurrent_agents`: integer cap for simultaneous agents.
+  - `min_plans_for_parallel`: integer threshold before parallelism activates.
+- `gates`: object of boolean confirmation gates (`confirm_project`, `confirm_phases`, `confirm_roadmap`, `confirm_breakdown`, `confirm_plan`, `execute_next_plan`, `issues_review`, `confirm_transition`).
+- `safety`: object of boolean safety toggles (`always_confirm_destructive`, `always_confirm_external_services`).
 
 ---
 
@@ -621,6 +677,7 @@ user_setup:
 | verify-work | UAT.md | — |
 | verify-phase | VERIFICATION.md | Fix plan recommendations |
 | discuss-phase | CONTEXT.md | — |
+| map-codebase | .planning/codebase/STACK.md | INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues | DEBUG.md files | UAT.md updates |
 | complete-milestone | MILESTONES.md, archive | ROADMAP.md collapse |
 
