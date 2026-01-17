@@ -202,7 +202,7 @@ Complete inventory of all GSD system files with metadata for documentation and m
 
 | Category | File Count | Total Lines |
 |----------|------------|-------------|
-| Agents | 11 | 8,337 |
+| Templates | 30 | 5,802 |
 | Commands | 24 | 5,387 |
 | Workflows | 12 | 5,615 |
 | **Total** | **84** | **27,591** |
