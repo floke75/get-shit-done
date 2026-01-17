@@ -64,7 +64,7 @@ Command completes with visual completion banner showing:
 
 ### Common Patterns
 - Start every new project with this command
-- Use `--map-codebase` first for brownfield projects
+- Use `/gsd:map-codebase` first for brownfield projects
 - `/clear` context after completion before planning
 
 ### Error Handling
