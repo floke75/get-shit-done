@@ -49,7 +49,7 @@ Integration verification checks four connection types:
 ---
 
 ## Verification Process
-
+Extract from phase SUMMARY.md files what each phase provides vs consumes.
 ### Step 1: Build Export/Import Map
 Extract from phase SUMMARYs what each phase provides vs consumes.
 
