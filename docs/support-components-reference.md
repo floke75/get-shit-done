@@ -15,7 +15,7 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | discuss-phase.md | Gather user context before planning | /gsd:discuss-phase | CONTEXT.md |
 | resume-project.md | Restore context for returning sessions | /gsd:resume-work | Display output |
 | transition.md | Phase completion and next phase setup | execute-phase | STATE.md updates |
-| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | CODEBASE.md |
+| map-codebase.md | Analyze existing codebase structure | gsd-codebase-mapper | .planning/codebase/STACK.md, INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues.md | Parallel gap investigation from UAT | /gsd:verify-work | DEBUG.md files |
 | list-phase-assumptions.md | Surface implicit assumptions in phase | /gsd:list-phase-assumptions | Display output |
 | complete-milestone.md | Archive completed milestone | /gsd:complete-milestone | Milestone archive |
@@ -168,7 +168,14 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 2. Identify frameworks, libraries, patterns
 3. Analyze architecture (layers, modules, dependencies)
 4. Detect technical debt and code smells
-5. Generate CODEBASE.md with findings
+5. Generate .planning/codebase/ analysis files with findings:
+   - STACK.md for frameworks, languages, and core tooling
+   - INTEGRATIONS.md for external services and dependencies
+   - ARCHITECTURE.md for system layers and module boundaries
+   - STRUCTURE.md for directory layout and key packages
+   - CONVENTIONS.md for patterns, naming, and standards
+   - TESTING.md for test strategy, tooling, and gaps
+   - CONCERNS.md for risks, debt, and hotspots
 
 **Key Behaviors:**
 - Produces multiple analysis files (structure, patterns, debt)
@@ -594,6 +601,7 @@ user_setup:
 | verify-work | UAT.md | — |
 | verify-phase | VERIFICATION.md | Fix plan recommendations |
 | discuss-phase | CONTEXT.md | — |
+| map-codebase | .planning/codebase/STACK.md | INTEGRATIONS.md, ARCHITECTURE.md, STRUCTURE.md, CONVENTIONS.md, TESTING.md, CONCERNS.md |
 | diagnose-issues | DEBUG.md files | UAT.md updates |
 | complete-milestone | MILESTONES.md, archive | ROADMAP.md collapse |
 
