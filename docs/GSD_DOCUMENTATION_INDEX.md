@@ -49,6 +49,10 @@ For modification tasks, load documents in this order:
 | [gsd-debugger](agents/gsd-debugger-reference.md) | Standard | ~200 | Modifying scientific debugging |
 | [gsd-codebase-mapper](agents/gsd-codebase-mapper-reference.md) | Standard | ~200 | Modifying brownfield analysis |
 | [gsd-roadmapper](agents/gsd-roadmapper-reference.md) | Standard | ~250 | Modifying roadmap generation |
+| gsd-integration-checker | Standard | — | Modifying cross-phase integration verification |
+| gsd-research-synthesizer | Summary | — | Modifying research output synthesis |
+
+**Note:** `gsd-integration-checker` (7/12 complexity) and `gsd-research-synthesizer` (6/12 complexity) exist in the system but reference documentation is pending. See FILE_MANIFEST.md for source file details.
 
 **Documentation Tiers:**
 - **Deep Reference (10-12 complexity):** Full extraction — modes, constraints, mechanisms, anti-patterns, change impact
@@ -275,20 +279,20 @@ executor ──► SUMMARY.md ──► verifier ──► VERIFICATION.md
 | Document | Lines | Est. Tokens |
 |----------|-------|-------------|
 | GSD_ARCHITECTURE_SCAFFOLDING.md | 384 | ~2,200 |
-| gsd-planner-reference.md | 464 | ~800 |
-| gsd-executor-reference.md | 386 | ~650 |
-| gsd-verifier-reference.md | 480 | ~800 |
-| gsd-plan-checker-reference.md | 476 | ~750 |
-| gsd-project-researcher-reference.md | 87 | ~150 |
-| gsd-phase-researcher-reference.md | 115 | ~200 |
-| gsd-debugger-reference.md | 124 | ~200 |
-| gsd-codebase-mapper-reference.md | 126 | ~200 |
-| gsd-roadmapper-reference.md | 144 | ~250 |
-| core-commands-reference.md | 342 | ~600 |
-| secondary-commands-reference.md | 367 | ~650 |
-| support-components-reference.md | 628 | ~1,100 |
-| FILE_MANIFEST.md | 266 | ~500 |
-| **Total Documentation** | ~4,400 | ~9,000 |
+| gsd-planner-reference.md | 463 | ~800 |
+| gsd-executor-reference.md | 385 | ~650 |
+| gsd-verifier-reference.md | 479 | ~800 |
+| gsd-plan-checker-reference.md | 475 | ~750 |
+| gsd-project-researcher-reference.md | 86 | ~150 |
+| gsd-phase-researcher-reference.md | 114 | ~200 |
+| gsd-debugger-reference.md | 123 | ~200 |
+| gsd-codebase-mapper-reference.md | 125 | ~200 |
+| gsd-roadmapper-reference.md | 143 | ~250 |
+| core-commands-reference.md | 341 | ~600 |
+| secondary-commands-reference.md | 366 | ~650 |
+| support-components-reference.md | 627 | ~1,100 |
+| FILE_MANIFEST.md | 265 | ~500 |
+| **Total Documentation** | ~4,376 | ~9,050 |
 
 ### Recommended Loading Strategy
 
@@ -325,6 +329,8 @@ executor ──► SUMMARY.md ──► verifier ──► VERIFICATION.md
 | gsd-debugger-reference.md | Complete | 2026-01-17 |
 | gsd-codebase-mapper-reference.md | Complete | 2026-01-17 |
 | gsd-roadmapper-reference.md | Complete | 2026-01-17 |
+| gsd-integration-checker-reference.md | Pending | — |
+| gsd-research-synthesizer-reference.md | Pending | — |
 | core-commands-reference.md | Complete | 2026-01-17 |
 | secondary-commands-reference.md | Complete | 2026-01-17 |
 | support-components-reference.md | Complete | 2026-01-17 |
