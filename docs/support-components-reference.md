@@ -288,13 +288,13 @@ Comprehensive reference for GSD workflows, templates, and reference documents.
 | research-project/FEATURES.md | .planning/research/FEATURES.md | gsd-project-researcher | Feature Landscape, Dependencies, MVP Definition |
 | research-project/ARCHITECTURE.md | .planning/research/ARCHITECTURE.md | gsd-project-researcher | Standard Architecture, Patterns, Data Flow |
 | research-project/PITFALLS.md | .planning/research/PITFALLS.md | gsd-project-researcher | Critical Pitfalls, Gotchas, Recovery Strategies |
-| codebase/STACK.md | .planning/codebase/STACK.md | gsd-codebase-mapper | Languages, Runtime, Frameworks |
-| codebase/INTEGRATIONS.md | .planning/codebase/INTEGRATIONS.md | gsd-codebase-mapper | External Services, Data Storage, Webhooks |
-| codebase/ARCHITECTURE.md | .planning/codebase/ARCHITECTURE.md | gsd-codebase-mapper | Pattern Overview, Layers, Data Flow |
-| codebase/STRUCTURE.md | .planning/codebase/STRUCTURE.md | gsd-codebase-mapper | Directory Layout, Key Files, Naming |
-| codebase/CONVENTIONS.md | .planning/codebase/CONVENTIONS.md | gsd-codebase-mapper | Naming Patterns, Code Style, Imports |
-| codebase/TESTING.md | .planning/codebase/TESTING.md | gsd-codebase-mapper | Test Framework, Organization, Mocking |
-| codebase/CONCERNS.md | .planning/codebase/CONCERNS.md | gsd-codebase-mapper | Tech Debt, Bugs, Performance |
+| codebase/stack.md | .planning/codebase/STACK.md | gsd-codebase-mapper | Languages, Runtime, Frameworks |
+| codebase/integrations.md | .planning/codebase/INTEGRATIONS.md | gsd-codebase-mapper | External Services, Data Storage, Webhooks |
+| codebase/architecture.md | .planning/codebase/ARCHITECTURE.md | gsd-codebase-mapper | Pattern Overview, Layers, Data Flow |
+| codebase/structure.md | .planning/codebase/STRUCTURE.md | gsd-codebase-mapper | Directory Layout, Key Files, Naming |
+| codebase/conventions.md | .planning/codebase/CONVENTIONS.md | gsd-codebase-mapper | Naming Patterns, Code Style, Imports |
+| codebase/testing.md | .planning/codebase/TESTING.md | gsd-codebase-mapper | Test Framework, Organization, Mocking |
+| codebase/concerns.md | .planning/codebase/CONCERNS.md | gsd-codebase-mapper | Tech Debt, Bugs, Performance |
 | todo.md | .planning/todos/pending/*.md, .planning/todos/done/*.md | add-todo | Problem, Solution, Metadata |
 | config.json | .planning/config.json | /gsd:new-project | mode, depth, parallelization, gates, safety |
 
