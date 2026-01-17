@@ -6,7 +6,7 @@
 | **Type** | Agent |
 | **Location** | `agents/gsd-research-synthesizer.md` |
 | **Size** | 247 lines |
-| **Documentation Tier** | Summary (Low) |
+| **Documentation Tier** | Summary |
 | **Complexity Score** | 1+2+2+1 = **6/12** |
 
 ### Complexity Breakdown
