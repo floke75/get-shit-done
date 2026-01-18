@@ -333,10 +333,9 @@ executor ──► SUMMARY.md ──► verifier ──► VERIFICATION.md
 | Full system change | Above + multiple references | ~5,000-6,000 |
 
 ### Document Sizes
-
 | Document | Lines | Est. Tokens |
 |----------|-------|-------------|
-| GSD_ARCHITECTURE_SCAFFOLDING.md | 434 | ~2,200 |
+| GSD_ARCHITECTURE_SCAFFOLDING.md | 451 | ~2,200 |
 | gsd-planner-reference.md | 464 | ~800 |
 | gsd-executor-reference.md | 407 | ~650 |
 | gsd-verifier-reference.md | 497 | ~800 |
@@ -348,11 +347,11 @@ executor ──► SUMMARY.md ──► verifier ──► VERIFICATION.md
 | gsd-roadmapper-reference.md | 413 | ~250 |
 | gsd-integration-checker-reference.md | 173 | ~300 |
 | gsd-research-synthesizer-reference.md | 185 | ~350 |
-| core-commands-reference.md | 419 | ~600 |
+| core-commands-reference.md | 436 | ~600 |
 | secondary-commands-reference.md | 458 | ~650 |
-| support-components-reference.md | 1,187 | ~1,600 |
-| operational-components-reference.md | 259 | ~550 |
-| FILE_MANIFEST.md | 340 | ~500 |
+| support-components-reference.md | 1,188 | ~1,600 |
+| operational-components-reference.md | 261 | ~550 |
+| FILE_MANIFEST.md | 350 | ~500 |
 | GSD-STYLE.md | 434 | ~400 |
 | **Total Documentation** | ~7,359 | ~11,400 |
 
