@@ -121,7 +121,7 @@ When settings.json exists, installer:
 | Settings overwritten | Manual edit after install | Re-run installer with --force-statusline |
 
 **Notes:**
-- The installer currently writes statusline and update hook commands using `$HOME/.claude` for global installs, even when a custom config directory is provided via `--config-dir` or `CLAUDE_CONFIG_DIR`. The runtime scripts still read from `~/.claude`, so custom config directories may require manual adjustment. 
+- The installer writes statusline and update hook commands using hardcoded `$HOME/.claude` paths for all global installs. When using a custom config directory via `--config-dir` or `CLAUDE_CONFIG_DIR`, the hooks are copied to the custom directory but the command paths in `settings.json` still reference `$HOME/.claude`, requiring manual adjustment.
 
 ---
 
