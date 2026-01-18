@@ -103,7 +103,7 @@
 | **gsd-verifier** | `<verification_process>`, `<core_principle>`, `<output>` |
 | **gsd-debugger** | `<investigation_techniques>`, `<hypothesis_testing>` |
 | **gsd-project-researcher** | `<research_modes>`, `<source_hierarchy>`, `<verification_protocol>` |
-| **gsd-research-synthesizer** | `<synthesis_process>`, `<cross_reference>`, `<priority_conflicts>` |
+| **gsd-research-synthesizer** | `<execution_flow>`, `<output_format>`, `<success_criteria>` |
 
 ---
 
@@ -365,10 +365,10 @@ When agents perform research, sources are ranked by confidence:
 
 | Behavior | Section | Key Rules |
 |----------|---------|-----------|
-| 4-file synthesis | `<synthesis_process>` | Reads STACK, FEATURES, ARCHITECTURE, PITFALLS |
-| Cross-referencing | `<cross_reference>` | Validates consistency across research files |
-| Priority conflicts | `<priority_conflicts>` | Resolves contradictions between sources |
-| Output format | `<structured_output>` | Produces SUMMARY.md with actionable synthesis |
+| 4-file synthesis | `<execution_flow>` | Reads STACK, FEATURES, ARCHITECTURE, PITFALLS |
+| Cross-referencing | `<execution_flow>` | Validates consistency across research files |
+| Priority conflicts | `<execution_flow>` | Resolves contradictions between sources |
+| Output format | `<output_format>` | Produces SUMMARY.md with actionable synthesis |
 
 **Key insight:** Synthesizer runs AFTER parallel researchers complete. It doesn't do research — it reconciles and prioritizes findings from the 4 research dimensions.
 
