@@ -22,7 +22,7 @@ Complete inventory of all GSD system files with metadata for documentation and m
 | docs/GSD_ARCHITECTURE_SCAFFOLDING.md | Architecture reference, registries, invariants, and key flows | 434 |
 | docs/GSD_DOCUMENTATION_INDEX.md | Master navigation index for GSD documentation | 399 |
 | docs/GSD_USER_JOURNEY.md | End-to-end user journey narrative and flow mapping | 469 |
-| docs/FILE_MANIFEST.md | Complete file inventory with metadata | 350 |
+| docs/FILE_MANIFEST.md | Complete file inventory with metadata | 351 |
 
 ### Component References (docs/*-components-reference.md)
 
