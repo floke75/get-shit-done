@@ -103,8 +103,8 @@ Add research flags:
 
 ## Confidence Assessment
 
-| Area | Confidence | Based On |
-|------|------------|----------|
+| Area | Confidence | Notes |
+|------|------------|-------|
 | Stack | HIGH/MEDIUM/LOW | Source quality from STACK.md |
 | Features | HIGH/MEDIUM/LOW | Source quality from FEATURES.md |
 | Architecture | HIGH/MEDIUM/LOW | Source quality from ARCHITECTURE.md |
