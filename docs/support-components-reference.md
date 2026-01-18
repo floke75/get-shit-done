@@ -358,28 +358,33 @@ Required frontmatter for `{phase}-{plan}-PLAN.md` files (see `get-shit-done/temp
 ---
 phase: "01-foundation"           # Phase directory name
 plan: "01"                       # Plan number within phase
-objective: "string"              # What this plan delivers (1 sentence)
+type: execute                    # Always execute or tdd
 wave: 1                          # Execution order (1 = first/parallel)
-depends_on: []                   # Plan IDs this depends on (e.g., ["01"])
+depends_on: []                   # Plan IDs this depends on (e.g., ["01-01"])
+files_modified: []               # Files this plan modifies
 autonomous: true                 # false = pause at checkpoints
-discovery: 0                     # Discovery level 0-3
+user_setup: []                   # Human-required setup items (optional)
 must_haves:
   truths:                        # User-observable outcomes (3-7 items)
     - "User can log in with email"
     - "Session persists across refresh"
   artifacts:                     # Files that must exist with quality bar
     - path: "src/lib/auth.ts"
+      provides: "Auth functions"
       min_lines: 50
       exports: ["login", "logout", "getCurrentUser"]
     - path: "src/app/api/auth/login/route.ts"
+      provides: "Login endpoint"
       min_lines: 30
   key_links:                     # Connections that must exist (3-5 items)
-    - source: "src/components/LoginForm.tsx"
-      target: "src/app/api/auth/login/route.ts"
-      method: "fetch POST"
-    - source: "src/app/api/auth/login/route.ts"
-      target: "prisma.user"
-      method: "findUnique"
+    - from: "src/components/LoginForm.tsx"
+      to: "/api/auth/login"
+      via: "fetch POST"
+      pattern: "fetch.*api/auth/login"
+    - from: "src/app/api/auth/login/route.ts"
+      to: "prisma.user"
+      via: "database query"
+      pattern: "prisma\\.user\\.findUnique"
 ---
 ```
 
@@ -389,11 +394,12 @@ must_haves:
 |-------|----------|---------|-------|
 | phase | Yes | — | Must match phase directory |
 | plan | Yes | — | Two-digit string |
-| objective | Yes | — | Single sentence |
+| type | Yes | execute | Always `execute` or `tdd` |
 | wave | Yes | 1 | Determines parallel execution |
-| depends_on | Yes | [] | Empty for wave 1 plans |
-| autonomous | No | true | Set false for checkpoints |
-| discovery | No | 0 | 0=none, 1=shallow, 2=standard, 3=deep |
+| depends_on | Yes | [] | Array of plan IDs (e.g., ["01-01"]) |
+| files_modified | Yes | [] | Files this plan modifies |
+| autonomous | Yes | true | Set false for checkpoints |
+| user_setup | No | [] | Human-required setup items |
 | must_haves | Yes | — | Verification contract |
 
 **must_haves.truths Rules:**
@@ -402,97 +408,143 @@ must_haves:
 - 3-7 items typical
 
 **must_haves.artifacts Rules:**
-- Every artifact needs path and min_lines
-- exports optional but recommended for libraries
-- min_lines prevents stub acceptance
+- Every artifact needs `path` and `provides`
+- `min_lines`, `exports`, `contains` optional but recommended
+- `min_lines` prevents stub acceptance
 
 **must_haves.key_links Rules:**
 - Identifies critical wiring between artifacts
-- method describes connection type
+- `via` describes connection type
+- `pattern` optional regex to verify connection
 - Prevents "created but not connected" failures
 
 ---
 
 ### UAT.md Schema
 
-Schema for `{phase}-UAT.md` files from `/gsd:verify-work` (see `get-shit-done/templates/uat.md`):
+Schema for `{phase}-UAT.md` files from `/gsd:verify-work` (see `get-shit-done/templates/UAT.md`):
 
 ```yaml
 ---
+status: testing | complete | diagnosed
 phase: "01-foundation"
-tested: "2026-01-18T14:30:00Z"
-status: passed | issues_found
-summary:
-  total: 5
-  passed: 4
-  failed: 1
-  skipped: 0
+source:
+  - 01-01-SUMMARY.md
+  - 01-02-SUMMARY.md
+started: "2026-01-18T14:30:00Z"
+updated: "2026-01-18T14:45:00Z"
 ---
 ```
 
 **Report Sections (in order):**
-1. **Test Results Table** — Per-test status with user feedback
-2. **Issues Summary** — Failed tests with diagnosis
-3. **Gap Closure Plans** — If issues found, plans created
-4. **Next Steps** — Routing based on results
+1. **Current Test** — Active test being presented (overwritten per test)
+2. **Tests** — Per-test results with user feedback
+3. **Summary** — Counts: total, passed, issues, pending, skipped
+4. **Gaps** — YAML format for `plan-phase --gaps` consumption
 
-**Test Result Entry:**
+**Test Entry Format:**
 ```markdown
-| # | Test | Status | Notes |
-|---|------|--------|-------|
-| 1 | User can log in with valid credentials | ✓ Pass | — |
-| 2 | Login fails with wrong password | ✓ Pass | Shows error message |
-| 3 | Session persists after refresh | ✗ Fail | User reported: "Gets logged out on refresh" |
+### 1. View Comments on Post
+expected: Comments section expands, shows count and comment list
+result: pass
+
+### 2. Create Top-Level Comment
+expected: Submit comment via rich text editor, appears in list
+result: issue
+reported: "works but doesn't show until I refresh the page"
+severity: major
 ```
 
-**Issue Entry:**
-```markdown
-### Issue 1: Session not persisting
-
-**Test:** Session persists after refresh
-**User Report:** Gets logged out on refresh
-**Diagnosis:** Cookie not set with correct expiry
-**Root Cause:** `maxAge` missing in session cookie options
-**Fix Plan:** 01-03-GAP-PLAN.md created
+**Gap Entry (YAML format for diagnosis):**
+```yaml
+- truth: "Comment appears immediately after submission"
+  status: failed
+  reason: "User reported: works but doesn't show until I refresh"
+  severity: major
+  test: 2
+  root_cause: ""     # Filled by diagnosis
+  artifacts: []      # Filled by diagnosis
+  missing: []        # Filled by diagnosis
+  debug_session: ""  # Filled by diagnosis
 ```
+
+**Severity Inference (never asked):**
+
+| User describes | Infer |
+|----------------|-------|
+| Crash, error, fails completely | blocker |
+| Doesn't work, nothing happens | major |
+| Works but..., slow, minor | minor |
+| Color, font, spacing, visual | cosmetic |
 
 ---
 
 ### Continuation File Schema
 
-Schema for `.planning/.continue-here.md` session handoff files (see `get-shit-done/references/continuation-format.md`):
+Schema for `.planning/phases/XX-name/.continue-here.md` session handoff files (see `get-shit-done/templates/continue-here.md`):
+
+```yaml
+---
+phase: XX-name
+task: 3
+total_tasks: 7
+status: in_progress
+last_updated: 2026-01-18T14:30:00Z
+---
+```
 
 ```markdown
-# Continue Here
+<current_state>
+[Where exactly are we? What's the immediate context?]
+</current_state>
 
-**Created:** {timestamp}
-**Context:** {what was happening}
-**Phase:** {current phase}
-**Plan:** {current plan if applicable}
+<completed_work>
+[What got done this session - be specific]
 
-## What Was Happening
+- Task 1: [name] - Done
+- Task 2: [name] - Done
+- Task 3: [name] - In progress, [what's done on it]
+</completed_work>
 
-{Description of task in progress}
+<remaining_work>
+[What's left in this phase]
 
-## Completed So Far
+- Task 3: [name] - [what's left to do]
+- Task 4: [name] - Not started
+</remaining_work>
 
-- [x] {completed step 1}
-- [x] {completed step 2}
-- [ ] {next step - IN PROGRESS}
-- [ ] {remaining step}
+<decisions_made>
+[Key decisions and why - so next session doesn't re-debate]
 
-## Next Action
+- Decided to use [X] because [reason]
+</decisions_made>
 
-{Specific instruction for resuming}
+<blockers>
+[Anything stuck or waiting on external factors]
 
-## Files Modified
+- [Blocker 1]: [status/workaround]
+</blockers>
 
-- `{path}` — {what was changed}
+<context>
+[Mental state, "vibe", anything that helps resume smoothly]
+</context>
 
-## Open Questions
+<next_action>
+[The very first thing to do when resuming]
 
-- {Any decision points or blockers}
+Start with: [specific action]
+</next_action>
 ```
+
+**Frontmatter Fields:**
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| phase | Yes | Phase directory name |
+| task | Yes | Current task number |
+| total_tasks | Yes | Total tasks in plan |
+| status | Yes | `in_progress`, `blocked`, `almost_done` |
+| last_updated | Yes | ISO timestamp |
 
 **When Created:**
 - Context reaches 70%+ and degradation detected
@@ -503,10 +555,10 @@ Schema for `.planning/.continue-here.md` session handoff files (see `get-shit-do
 - `/gsd:resume-work` detects file, presents context, routes to continuation
 - File deleted after successful resume
 
-**Critical Fields:**
-- "Next Action" must be specific enough to continue without re-reading context
-- "Completed So Far" prevents re-doing work
-- "Files Modified" allows verifying state
+**Critical Rules:**
+- `<next_action>` must be actionable without reading anything else
+- Include WHY decisions were made, not just what
+- Be specific enough that a fresh Claude instance understands immediately
 
 ---
 
