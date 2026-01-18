@@ -396,18 +396,3 @@ executor ──► SUMMARY.md ──► verifier ──► VERIFICATION.md
 | secondary-commands-reference.md | Complete | 2026-01-17 |
 | support-components-reference.md | Complete | 2026-01-17 |
 | operational-components-reference.md | Complete | 2026-01-17 |
-
----
-
-## About docs/system/
-
-The `docs/system/` folder contains codebase analysis files generated during an independent documentation pass. These files follow the same template structure as `/gsd:map-codebase` outputs:
-
-- `ARCHITECTURE.md` — Pattern overview and layers
-- `STRUCTURE.md` — Directory layout and key files
-- `CONVENTIONS.md` — Naming patterns and code style
-- `TESTING.md` — Test patterns (GSD uses execution-time verification)
-- `INTEGRATIONS.md` — External services and distribution
-- `CONCERNS.md` — Tech debt and fragile areas
-
-**Note:** These files were generated at a specific point in time (2026-01-16) and may not reflect the current codebase state. The main documentation (this index, FILE_MANIFEST.md, and component references) is the authoritative source for GSD system understanding. The system/ files are useful for understanding the codebase analysis template format.
