@@ -428,9 +428,7 @@ Schema for `{phase}-UAT.md` files from `/gsd:verify-work` (see `get-shit-done/te
 ---
 status: testing | complete | diagnosed
 phase: "01-foundation"
-source:
-  - 01-01-SUMMARY.md
-  - 01-02-SUMMARY.md
+source: 01-01-SUMMARY.md, 01-02-SUMMARY.md
 started: "2026-01-18T14:30:00Z"
 updated: "2026-01-18T14:45:00Z"
 ---
