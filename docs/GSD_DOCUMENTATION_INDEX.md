@@ -54,7 +54,7 @@ The system solves a core problem: Claude's output quality degrades as context fi
 
 | File | Purpose |
 |------|---------|
-| `GSD_ARCHITECTURE_SCAFFOLDING.md` | Full architectural details, registries, invariants |
+| [GSD_ARCHITECTURE_SCAFFOLDING.md](GSD_ARCHITECTURE_SCAFFOLDING.md) | Full architectural details, registries, invariants |
 | `GSD-STYLE.md` | Contributor style guide (at repository root) |
 
 ---
@@ -64,7 +64,7 @@ The system solves a core problem: Claude's output quality degrades as context fi
 For modification tasks, load documents in this order:
 
 1. **This index** — Navigation and document map
-2. **GSD_ARCHITECTURE_SCAFFOLDING.md** — System architecture, registries, flows
+2. **[GSD_ARCHITECTURE_SCAFFOLDING.md](GSD_ARCHITECTURE_SCAFFOLDING.md)** — System architecture, registries, flows
 3. **Relevant component doc** — Behavioral details for the specific component
 
 **Minimal context load:** Index + Scaffolding (~3,000 tokens)
@@ -79,7 +79,7 @@ For modification tasks, load documents in this order:
 
 | Document | Location | Est. Tokens | Purpose |
 |----------|----------|-------------|---------|
-| GSD_ARCHITECTURE_SCAFFOLDING.md | Root | ~2,200 | System architecture, registries, flows, invariants |
+| [GSD_ARCHITECTURE_SCAFFOLDING.md](GSD_ARCHITECTURE_SCAFFOLDING.md) | docs/ | ~2,200 | System architecture, registries, flows, invariants |
 
 **Always load this first.** Contains:
 - Five Invariant Principles
@@ -127,6 +127,7 @@ For modification tasks, load documents in this order:
 
 | Document | Coverage | Est. Tokens | When to Load |
 |----------|----------|-------------|--------------|
+| [GSD_USER_JOURNEY.md](GSD_USER_JOURNEY.md) | End-to-end flow, decision points, context persistence | ~800 | Understanding holistic system flow, debugging context issues |
 | [support-components-reference.md](support-components-reference.md) | Workflows, templates, references, XML conventions, error handling | ~1,200 | Modifying workflows, understanding template schemas, using references |
 | [operational-components-reference.md](operational-components-reference.md) | Install flow, statusline, update check, security, distribution | ~550 | Modifying installer or hooks behavior |
 | [FILE_MANIFEST.md](FILE_MANIFEST.md) | Complete file inventory | ~500 | Finding file locations, understanding relationships |

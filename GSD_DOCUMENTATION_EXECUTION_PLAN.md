@@ -32,7 +32,7 @@ docs/
 
 Before starting, ensure you have:
 - [ ] GSD repository cloned locally
-- [ ] `GSD_ARCHITECTURE_SCAFFOLDING.md` in your project (already created)
+- [ ] `docs/GSD_ARCHITECTURE_SCAFFOLDING.md` in your project (already created)
 - [ ] `extraction-case-study-gsd-planner.md` available as methodology reference
 - [ ] Claude Code or similar agent with file read/write access
 
@@ -1087,9 +1087,9 @@ docs/
 └── support-components-reference.md
 ```
 
-Plus at project root:
+The architecture scaffolding document is located at:
 ```
-GSD_ARCHITECTURE_SCAFFOLDING.md     # Already created
+docs/GSD_ARCHITECTURE_SCAFFOLDING.md     # Already created
 ```
 
 ---
